@@ -1,0 +1,192 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-07-19T02:16:40-05:00",
+    "name": "Ryland Bot",
+    "author": "geroldsmichael@gmail.com",
+    "description": "Discord Bot",
+    "features": null,
+    "docker_images": {
+        "Nodejs 20": "ghcr.io/parkervcp/yolks:nodejs_20"
+    },
+    "file_denylist": [],
+    "startup": "if [[ ! -d /home/container/bot/ ]]; then \n    git clone https://github.com/Rylandsbots/Moderation-Bot.git /home/container/bot/; \nelse \n    if [[ -d /home/container/bot/.git ]] && [[ ${AUTO_UPDATE} == \"1\" ]]; then \n        cd /home/container/bot/ && git pull; \n    fi; \nfi; \nif [[ ! -z ${NODE_PACKAGES} ]]; then \n    cd /home/container/bot/ && /usr/local/bin/npm install ${NODE_PACKAGES}; \nfi; \nif [[ ! -z ${UNNODE_PACKAGES} ]]; then \n    cd /home/container/bot/ && /usr/local/bin/npm uninstall ${UNNODE_PACKAGES}; \nfi; \nif [ -f /home/container/bot/package.json ]; then \n    cd /home/container/bot/ && /usr/local/bin/npm install; \nfi; \necho \"module.exports = { \n    clientid: '${CLIENT_ID_DEFAULT}', \n    token: '${TOKEN_DEFAULT}', \n    guildid: '${GUILD_ID_DEFAULT}', \n    botstartmessage: '${BOT_START_MESSAGE}', \n    modpermissions: '${MOD_PERMISSIONS}', \n    ownerpermissions: '${OWNER_PERMISSIONS}', \n    botlogs: '${BOT_LOGS}', \n    welcomechannel: '${WELCOME_CHANNEL}', \n    leavechannel: '${LEAVE_CHANNEL}', \n    newmemberrole: '${NEW_MEMBER_ROLE}',  \n    welcomemsg: '${WELCOME_MSG_DEFAULT}', \n    leavemsg: '${LEAVE_MSG_DEFAULT}', \n    commandChannelLocked: '${COMMAND_CHANNEL_LOCKED}', \n    commandChannelId: '${COMMAND_CHANNEL_ID}' \n}\" > /home/container/bot/src/settings.js; \n/usr/local/bin/node \"/home/container/bot/src/index.js\" ${NODE_ARGS}",
+    "config": {
+        "files": "{}",
+        "startup": "{\n    \"done\": [\n        \"change this text 1\",\n        \"change this text 2\"\n    ]\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "/bin/bash",
+            "container": "ghcr.io/parkervcp/yolks:nodejs_20",
+            "entrypoint": "/bin/bash -c \"\nrm -rf /home/container/bot; \\\n    git clone https://github.com/Rylandsbots/Moderation-Bot.git /home/container/bot; \\\n    cd /home/container/bot; \\\n    /usr/local/bin/npm install; \\\n    "
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Bot Client ID",
+            "description": "The client ID to connect to the Discord bot.",
+            "env_variable": "CLIENT_ID_DEFAULT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Discord Bot Token",
+            "description": "The token for the Discord bot.",
+            "env_variable": "TOKEN_DEFAULT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Discord Server ID",
+            "description": "The ID of the Discord guild (server) the bot will operate in.",
+            "env_variable": "GUILD_ID_DEFAULT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Your Custom Bot Startup Message",
+            "description": "The start message for the bot.",
+            "env_variable": "BOT_START_MESSAGE",
+            "default_value": "Bot is starting...",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Moderator Role ID",
+            "description": "The permissions for the moderators.",
+            "env_variable": "MOD_PERMISSIONS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Owner Role ID",
+            "description": "The permissions for the owner.",
+            "env_variable": "OWNER_PERMISSIONS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Bot Logs Channel ID",
+            "description": "The location or channel for bot logs.",
+            "env_variable": "BOT_LOGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Welcome Channel ID",
+            "description": "The ID of the welcome channel.",
+            "env_variable": "WELCOME_CHANNEL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Role ID To Give To New Members",
+            "description": "The role ID assigned to new members.",
+            "env_variable": "NEW_MEMBER_ROLE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Leave Channel ID",
+            "description": "The ID of the leave channel.",
+            "env_variable": "LEAVE_CHANNEL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Additional Node packages",
+            "description": "Install additional node packages.\r\n\r\nUse spaces to separate.",
+            "env_variable": "NODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Remove Node Packages",
+            "description": "Specify Node packages to uninstall. Use spaces to separate multiple packages.",
+            "env_variable": "UNNODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Welcome Message",
+            "description": "The message to display when a new member joins.",
+            "env_variable": "WELCOME_MSG_DEFAULT",
+            "default_value": "Welcome to the server!",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Leave Message",
+            "description": "The message to display when a member leaves the server.",
+            "env_variable": "LEAVE_MSG_DEFAULT",
+            "default_value": "Goodbye! We hope to see you again soon.",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Command Channel Locked",
+            "description": "Set to 'true' if commands should be restricted to a specific channel, 'false' otherwise.",
+            "env_variable": "COMMAND_CHANNEL_LOCKED",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Command Channel ID",
+            "description": "The ID of the channel where commands are allowed if Command Channel Locked is true.",
+            "env_variable": "COMMAND_CHANNEL_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        }
+    ]
+}
